@@ -18,7 +18,7 @@ if (!fs.existsSync(uploadDir)) {
   console.log("📁 Folder 'uploads' dibuat otomatis.");
 }
 
-// Konfigurasi multer
+// Konfigurasi multer (2.x)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) =>
@@ -77,11 +77,12 @@ app.delete("/files/:name", async (req, res) => {
   }
 });
 
-// Jalankan server
-app.listen(PORT, () => {
-  console.log(`🚀 ElectraPrint Backend berjalan di port ${PORT}`);
-});
 // Health check endpoint untuk Render
 app.get("/healthz", (req, res) => {
   res.status(200).send("OK");
+});
+
+// Jalankan server
+app.listen(PORT, () => {
+  console.log(`🚀 ElectraPrint Backend berjalan di port ${PORT}`);
 });
